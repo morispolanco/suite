@@ -54,9 +54,6 @@ def generador_emails_nuevos():
         
         st.success("E-mail generado:")
         st.write(email)
-        st.write(f"Tono del e-mail: {tono}")
-        st.write(f"Longitud del e-mail generado: {longitud_email_generado} ({len(email)} caracteres)")
-        st.write(f"Extensión del e-mail generado: {extension_email_generado}")
 
 def responder_emails():
     st.title("Responder a e-mails")
@@ -70,16 +67,15 @@ def responder_emails():
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
-        email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
-        longitud_respuesta_generada = clasificar_longitud(email)
-        extension_respuesta_generada = clasificar_extension(email)
+        respuesta = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
+        longitud_respuesta_generada = clasificar_longitud(respuesta)
+        extension_respuesta_generada = clasificar_extension(respuesta)
         
         st.success("Respuesta generada:")
-        st.write(email)
-        st.write(f"Intención de la respuesta: {intencion_respuesta}")
-        st.write(f"Tono de la respuesta: {tono_respuesta}")
-        st.write(f"Longitud de la respuesta generada: {longitud_respuesta_generada} ({len(email)} caracteres)")
-        st.write(f"Extensión de la respuesta generada: {extension_respuesta_generada}")
+        st.write(respuesta)
+
+
+
 def corrector_estilo():
     st.title("Corrector de estilo")
     prompt = st.text_area("Ingresa el texto a corregir")
