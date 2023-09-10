@@ -1,5 +1,6 @@
 import streamlit as st
 import openai
+import speech_recognition as sr
 
 def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.7):
     openai.api_key = api_key
@@ -36,6 +37,24 @@ def clasificar_extension(respuesta):
     else:
         return "Extensa"
 
+def convertir_voz_a_texto():
+    st.title("Convertir voz a texto")
+    archivo_audio = st.file_uploader("Selecciona un archivo de audio", type=["wav", "mp3"])
+    
+    if archivo_audio is not None:
+        r = sr.Recognizer()
+        
+        with sr.AudioFile(archivo_audio) as source:
+            audio = r.record(source)
+            
+        try:
+            texto = r.recognize_google(audio, language="es")
+            st.success("Texto obtenido:")
+            st.write(texto)
+        except sr.UnknownValueError:
+            st.error("No se pudo reconocer el audio")
+        except sr.RequestError as e:
+            st.error(f"Error al procesar la solicitud: {e}")
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
@@ -131,7 +150,7 @@ def generador_mensajes_linkedin():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=2080)
+        mensaje = generar_texto(prompt, api_key, max_tokens=2000)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
@@ -189,10 +208,12 @@ def main():
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
-        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
+        ("Convertir voz a texto", "Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
     )
     
-    if app == "Generador de e-mails nuevos":
+    if app == "Convertir voz a texto":
+        convertir_voz_a_texto()
+    elif app == "Generador de e-mails nuevos":
         generador_emails_nuevos()
     elif app == "Responder a e-mails":
         responder_emails()
