@@ -15,15 +15,6 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     
     return response.choices[0].text.strip()
 
-def clasificar_longitud(respuesta):
-    longitud = len(respuesta)
-    
-    if longitud < 50:
-        return "Corta"
-    elif longitud < 150:
-        return "Mediana"
-    else:
-        return "Larga"
 
 def clasificar_extension(respuesta):
     palabras = respuesta.split()
@@ -48,6 +39,26 @@ def generador_emails_nuevos():
         
         st.success("E-mail generado:")
         st.write(email)
+
+def responder_emails():
+    st.title("Responder a e-mails")
+    prompt = st.text_area("Ingresa el e-mail recibido")
+    
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    
+    intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
+    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
+    
+    if st.button("Responder al e-mail") and api_key:
+        prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
+        email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
+        longitud_respuesta = clasificar_longitud(email)
+        
+        st.success("Respuesta generada:")
+        st.write(email)
+        st.write(f"Intención de la respuesta: {intencion_respuesta}")
+        st.write(f"Tono de la respuesta: {tono_respuesta}")
+        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
 
 def responder_emails():
     st.title("Responder a e-mails")
