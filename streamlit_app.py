@@ -36,12 +36,24 @@ def generador_emails():
     
     correo_respuesta = st.text_input("Ingresa el correo al que quieres responder")
     
+    intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
+    
     if st.button("Generar e-mail") and api_key:
-        prompt += f"\n\nResponder a: {correo_respuesta}"
+        prompt += f"\n\nResponder a: {correo_respuesta}\nIntención de la respuesta: {intencion_respuesta}"
         email = generar_texto(prompt, api_key)
         
         st.success("E-mail generado:")
         st.write(email)
+
+def main():
+    st.sidebar.title("Aplicaciones")
+    app = st.sidebar.selectbox(
+        "Selecciona una aplicación",
+        ("Generador de e-mails",)
+    )
+    
+    if app == "Generador de e-mails":
+        generador_emails()
 
 def generador_post_blog():
     st.title("Generador de post de blog")
