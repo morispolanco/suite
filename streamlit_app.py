@@ -124,6 +124,18 @@ def generador_mensajes_instagram():
         st.success("Mensaje generado:")
         st.write(mensaje)
 
+def generador_mensajes_linkedin():
+    st.title("Generador de mensajes de LinkedIn")
+    prompt = st.text_area("Ingresa el inicio del mensaje")
+    
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    
+    if st.button("Generar mensaje") and api_key:
+        mensaje = generar_texto(prompt, api_key, max_tokens=280)
+        
+        st.success("Mensaje generado:")
+        st.write(mensaje)
+
 def generador_ensayos():
     st.title("Generador de ensayos")
     prompt = st.text_area("Ingresa el título del ensayo")
@@ -132,16 +144,52 @@ def generador_ensayos():
     
     if st.button("Generar ensayo") and api_key:
         prompt += "\n\nLongitud del ensayo: Largo"
-        ensayo = generar_texto(prompt, api_key, max_tokens=3992)
+        ensayo = generar_texto(prompt, api_key, max_tokens=4000)
         
         st.success("Ensayo generado:")
         st.write(ensayo)
+
+def expansor():
+    st.title("Expansor")
+    prompt = st.text_area("Ingresa el texto a expandir")
+    
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    
+    if st.button("Expandir texto") and api_key:
+        texto_expandido = generar_texto(prompt, api_key, max_tokens=4000)
+        
+        st.success("Texto expandido:")
+        st.write(texto_expandido)
+
+def resumidor():
+    st.title("Resumidor")
+    prompt = st.text_area("Ingresa el texto a resumir")
+    
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    
+    if st.button("Resumir texto") and api_key:
+        texto_resumido = generar_texto(prompt, api_key, max_tokens=4000)
+        
+        st.success("Texto resumido:")
+        st.write(texto_resumido)
+
+def parafraseador():
+    st.title("Parafraseador")
+    prompt = st.text_area("Ingresa el texto a parafrasear")
+    
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    
+    if st.button("Parafrasear texto") and api_key:
+        texto_parafraseado = generar_texto(prompt, api_key, max_tokens=4000)
+        
+        st.success("Texto parafraseado:")
+        st.write(texto_parafraseado)
 
 def main():
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
-        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de ensayos")
+        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
     )
     
     if app == "Generador de e-mails nuevos":
@@ -156,8 +204,16 @@ def main():
         generador_mensajes_twitter()
     elif app == "Generador de mensajes de Instagram":
         generador_mensajes_instagram()
+    elif app == "Generador de mensajes de LinkedIn":
+        generador_mensajes_linkedin()
     elif app == "Generador de ensayos":
         generador_ensayos()
+    elif app == "Expansor":
+        expansor()
+    elif app == "Resumidor":
+        resumidor()
+    elif app == "Parafraseador":
+        parafraseador()
 
 if __name__ == "__main__":
     main()
