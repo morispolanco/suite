@@ -159,18 +159,6 @@ def expansor():
         st.success("Texto expandido:")
         st.write(texto_expandido)
 
-def resumidor():
-    st.title("Resumidor")
-    prompt = st.text_area("Ingresa el texto a resumir")
-    
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
-    if st.button("Resumir texto") and api_key:
-        texto_resumido = generar_texto(prompt, api_key, max_tokens=4000)
-        
-        st.success("Texto resumido:")
-        st.write(texto_resumido)
-
 def parafraseador():
     st.title("Parafraseador")
     prompt = st.text_area("Ingresa el texto a parafrasear")
@@ -187,7 +175,7 @@ def main():
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
-        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
+        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Parafraseador")
     )
     
     if app == "Generador de e-mails nuevos":
@@ -208,8 +196,6 @@ def main():
         generador_ensayos()
     elif app == "Expansor":
         expansor()
-    elif app == "Resumidor":
-        resumidor()
     elif app == "Parafraseador":
         parafraseador()
 
