@@ -42,24 +42,26 @@ def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
     tono = st.selectbox("Selecciona el tono del e-mail", ("Formal", "Informal"))
+    longitud_email = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
     
     api_key = os.getenv("OPENAI_API_KEY")
     
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}"
+        prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}\nLongitud del e-mail: {longitud_email}"
         email = generar_texto(prompt, api_key, max_tokens=3950)
-        longitud_email = clasificar_longitud(email)
-        extension_email = clasificar_extension(email)
+        longitud_email_generado = clasificar_longitud(email)
+        extension_email_generado = clasificar_extension(email)
         
         st.success("E-mail generado:")
         st.write(email)
         st.write(f"Tono del e-mail: {tono}")
-        st.write(f"Longitud del e-mail: {longitud_email}")
-        st.write(f"Extensión del e-mail: {extension_email}")
+        st.write(f"Longitud del e-mail generado: {longitud_email_generado} ({len(email)} caracteres)")
+        st.write(f"Extensión del e-mail generado: {extension_email_generado}")
 
 def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
+    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 500, 150)
     
     api_key = os.getenv("OPENAI_API_KEY")
     
@@ -67,18 +69,17 @@ def responder_emails():
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
     
     if st.button("Responder al e-mail") and api_key:
-        prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
+        prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
         email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
-        longitud_respuesta = clasificar_longitud(email)
-        extension_respuesta = clasificar_extension(email)
+        longitud_respuesta_generada = clasificar_longitud(email)
+        extension_respuesta_generada = clasificar_extension(email)
         
         st.success("Respuesta generada:")
         st.write(email)
         st.write(f"Intención de la respuesta: {intencion_respuesta}")
         st.write(f"Tono de la respuesta: {tono_respuesta}")
-        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
-        st.write(f"Extensión de la respuesta: {extension_respuesta}")
-
+        st.write(f"Longitud de la respuesta generada: {longitud_respuesta_generada} ({len(email)} caracteres)")
+        st.write(f"Extensión de la respuesta generada: {extension_respuesta_generada}")
 def corrector_estilo():
     st.title("Corrector de estilo")
     prompt = st.text_area("Ingresa el texto a corregir")
