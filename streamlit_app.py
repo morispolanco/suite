@@ -36,7 +36,6 @@ def clasificar_extension(respuesta):
     else:
         return "Extensa"
 
-
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
@@ -46,13 +45,15 @@ def generador_emails_nuevos():
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
     
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}\nTono de la respuesta: {tono_respuesta}"
-        email = generar_texto(prompt, api_key, max_tokens=3950)
-        
-        st.success("E-mail generado:")
-        st.write(email)
-    
-    
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            prompt = f"Asunto del e-mail: {asunto}\nTono de la respuesta: {tono_respuesta}"
+            email = generar_texto(prompt, api_key, max_tokens=3950)
+            
+            st.success("E-mail generado:")
+            st.write(email)
+
 def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
@@ -64,17 +65,20 @@ def responder_emails():
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
     
     if st.button("Responder al e-mail") and api_key:
-        prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
-        email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
-        longitud_respuesta = clasificar_longitud(email)
-        extension_respuesta = clasificar_extension(email)
-        
-        st.success("Respuesta generada:")
-        st.write(email)
-        st.write(f"Intención de la respuesta: {intencion_respuesta}")
-        st.write(f"Tono de la respuesta: {tono_respuesta}")
-        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
-        st.write(f"Extensión de la respuesta: {extension_respuesta}")
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
+            email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
+            longitud_respuesta = clasificar_longitud(email)
+            extension_respuesta = clasificar_extension(email)
+            
+            st.success("Respuesta generada:")
+            st.write(email)
+            st.write(f"Intención de la respuesta: {intencion_respuesta}")
+            st.write(f"Tono de la respuesta: {tono_respuesta}")
+            st.write(f"Longitud de la respuesta: {longitud_respuesta}")
+            st.write(f"Extensión de la respuesta: {extension_respuesta}")
 
 def corrector_estilo():
     st.title("Corrector de estilo")
@@ -83,22 +87,28 @@ def corrector_estilo():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Corregir estilo") and api_key:
-        correccion = generar_texto(prompt, api_key, max_tokens=3950)
-        
-        st.success("Texto corregido:")
-        st.write(correccion)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            correccion = generar_texto(prompt, api_key, max_tokens=3950)
+            
+            st.success("Texto corregido:")
+            st.write(correccion)
 
 def generador_mensajes_facebook():
     st.title("Generador de mensajes de Facebook")
-    prompt = st.text_area("Ingresa e título del mensaje")
+    prompt = st.text_area("Ingresa el título del mensaje")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=3950)
-        
-        st.success("Mensaje generado:")
-        st.write(mensaje)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            mensaje = generar_texto(prompt, api_key, max_tokens=3950)
+            
+            st.success("Mensaje generado:")
+            st.write(mensaje)
 
 def generador_mensajes_twitter():
     st.title("Generador de mensajes de Twitter")
@@ -107,22 +117,28 @@ def generador_mensajes_twitter():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=280)
-        
-        st.success("Mensaje generado:")
-        st.write(mensaje)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            mensaje = generar_texto(prompt, api_key, max_tokens=280)
+            
+            st.success("Mensaje generado:")
+            st.write(mensaje)
 
 def generador_mensajes_instagram():
     st.title("Generador de mensajes de Instagram")
-    prompt = st.text_area("Ingresa el títuo del mensaje")
+    prompt = st.text_area("Ingresa el título del mensaje")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=2200)
-        
-        st.success("Mensaje generado:")
-        st.write(mensaje)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            mensaje = generar_texto(prompt, api_key, max_tokens=2200)
+            
+            st.success("Mensaje generado:")
+            st.write(mensaje)
 
 def generador_mensajes_linkedin():
     st.title("Generador de mensajes de LinkedIn")
@@ -131,10 +147,13 @@ def generador_mensajes_linkedin():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=580)
-        
-        st.success("Mensaje generado:")
-        st.write(mensaje)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            mensaje = generar_texto(prompt, api_key, max_tokens=580)
+            
+            st.success("Mensaje generado:")
+            st.write(mensaje)
 
 def generador_ensayos():
     st.title("Generador de ensayos")
@@ -143,11 +162,14 @@ def generador_ensayos():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar ensayo") and api_key:
-        prompt += "\n\nLongitud del ensayo: Largo"
-        ensayo = generar_texto(prompt, api_key, max_tokens=4000)
-        
-        st.success("Ensayo generado:")
-        st.write(ensayo)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            prompt += "\n\nLongitud del ensayo: Largo"
+            ensayo = generar_texto(prompt, api_key, max_tokens=4000)
+            
+            st.success("Ensayo generado:")
+            st.write(ensayo)
 
 def expansor():
     st.title("Expansor")
@@ -156,10 +178,13 @@ def expansor():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Expandir texto") and api_key:
-        texto_expandido = generar_texto(prompt, api_key, max_tokens=4000)
-        
-        st.success("Texto expandido:")
-        st.write(texto_expandido)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            texto_expandido = generar_texto(prompt, api_key, max_tokens=4000)
+            
+            st.success("Texto expandido:")
+            st.write(texto_expandido)
 
 def resumidor():
     st.title("Resumidor")
@@ -168,10 +193,13 @@ def resumidor():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Resumir texto") and api_key:
-        texto_resumido = generar_texto(prompt, api_key, max_tokens=4000)
-        
-        st.success("Texto resumido:")
-        st.write(texto_resumido)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            texto_resumido = generar_texto(prompt, api_key, max_tokens=4000)
+            
+            st.success("Texto resumido:")
+            st.write(texto_resumido)
 
 def parafraseador():
     st.title("Parafraseador")
@@ -180,40 +208,48 @@ def parafraseador():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Parafrasear texto") and api_key:
-        texto_parafraseado = generar_texto(prompt, api_key, max_tokens=4000)
-        
-        st.success("Texto parafraseado:")
-        st.write(texto_parafraseado)
+        if not api_key:
+            st.warning("Por favor ingresa una API Key válida para continuar.")
+        else:
+            texto_parafraseado = generar_texto(prompt, api_key, max_tokens=4000)
+            
+            st.success("Texto parafraseado:")
+            st.write(texto_parafraseado)
 
 def main():
     st.sidebar.title("Aplicaciones")
-    app = st.sidebar.selectbox(
-        "Selecciona una aplicación",
-        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
-    )
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
-    if app == "Generador de e-mails nuevos":
-        generador_emails_nuevos()
-    elif app == "Responder a e-mails":
-        responder_emails()
-    elif app == "Corrector de estilo":
-        corrector_estilo()
-    elif app == "Generador de mensajes de Facebook":
-        generador_mensajes_facebook()
-    elif app == "Generador de mensajes de Twitter":
-        generador_mensajes_twitter()
-    elif app == "Generador de mensajes de Instagram":
-        generador_mensajes_instagram()
-    elif app == "Generador de mensajes de LinkedIn":
-        generador_mensajes_linkedin()
-    elif app == "Generador de ensayos":
-        generador_ensayos()
-    elif app == "Expansor":
-        expansor()
-    elif app == "Resumidor":
-        resumidor()
-    elif app == "Parafraseador":
-        parafraseador()
+    if not api_key:
+        st.warning("Por favor ingresa una API Key válida para continuar.")
+    else:
+        app = st.sidebar.selectbox(
+            "Selecciona una aplicación",
+            ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
+        )
+        
+        if app == "Generador de e-mails nuevos":
+            generador_emails_nuevos()
+        elif app == "Responder a e-mails":
+            responder_emails()
+        elif app == "Corrector de estilo":
+            corrector_estilo()
+        elif app == "Generador de mensajes de Facebook":
+            generador_mensajes_facebook()
+        elif app == "Generador de mensajes de Twitter":
+            generador_mensajes_twitter()
+        elif app == "Generador de mensajes de Instagram":
+            generador_mensajes_instagram()
+        elif app == "Generador de mensajes de LinkedIn":
+            generador_mensajes_linkedin()
+        elif app == "Generador de ensayos":
+            generador_ensayos()
+        elif app == "Expansor":
+            expansor()
+        elif app == "Resumidor":
+            resumidor()
+        elif app == "Parafraseador":
+            parafraseador()
 
 if __name__ == "__main__":
     main()
