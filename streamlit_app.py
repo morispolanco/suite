@@ -28,6 +28,16 @@ def corrector_estilo():
         st.success("Texto corregido:")
         st.write(correccion)
 
+def clasificar_longitud(respuesta):
+    longitud = len(respuesta)
+    
+    if longitud < 50:
+        return "Corta"
+    elif longitud < 150:
+        return "Mediana"
+    else:
+        return "Larga"
+
 def generador_emails():
     st.title("Generador de e-mails")
     prompt = st.text_area("Ingresa el inicio del e-mail")
@@ -41,9 +51,11 @@ def generador_emails():
     if st.button("Generar e-mail") and api_key:
         prompt += f"\n\nResponder a: {correo_respuesta}\nIntención de la respuesta: {intencion_respuesta}"
         email = generar_texto(prompt, api_key)
+        longitud_respuesta = clasificar_longitud(email)
         
         st.success("E-mail generado:")
         st.write(email)
+        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
 
 def main():
     st.sidebar.title("Aplicaciones")
