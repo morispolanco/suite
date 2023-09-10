@@ -36,29 +36,23 @@ def clasificar_extension(respuesta):
     else:
         return "Extensa"
 
+
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
-    prompt = st.text_area("Ingresa el asunto del e-mail")
+    asunto = st.text_input("Ingresa el asunto del e-mail")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
-    asunto_respuesta = st.text_input("Ingresa el asunto de la respuesta")
     
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
     
     if st.button("Generar e-mail") and api_key:
-        prompt += f"\n\nAsunto de la respuesta: {asunto_respuesta}\nTono de la respuesta: {tono_respuesta}"
+        prompt = f"Asunto del e-mail: {asunto}\nTono de la respuesta: {tono_respuesta}"
         email = generar_texto(prompt, api_key, max_tokens=3950)
-        longitud_respuesta = clasificar_longitud(email)
-        extension_respuesta = clasificar_extension(email)
         
         st.success("E-mail generado:")
         st.write(email)
-        st.write(f"Asunto de la respuesta: {asunto_respuesta}")
-        st.write(f"Tono de la respuesta: {tono_respuesta}")
-        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
-        st.write(f"Extensión de la respuesta: {extension_respuesta}")
-
+    
+    
 def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
