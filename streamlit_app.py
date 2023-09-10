@@ -1,7 +1,7 @@
 import streamlit as st
 import openai
 
-def generar_texto(prompt, api_key, max_tokens=200, temperature=0.7):
+def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.7):
     openai.api_key = api_key
     
     response = openai.Completion.create(
@@ -71,7 +71,7 @@ def responder_emails():
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
-        email = generar_texto(prompt, api_key, max_tokens=100, temperature=0.5)
+        email = generar_texto(prompt, api_key, max_tokens=4096, temperature=0.5)
         longitud_respuesta = clasificar_longitud(email)
         extension_respuesta = clasificar_extension(email)
         
@@ -89,7 +89,7 @@ def corrector_estilo():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Corregir estilo") and api_key:
-        correccion = generar_texto(prompt, api_key, max_tokens=100, temperature=0.5)
+        correccion = generar_texto(prompt, api_key, max_tokens=4096)
         
         st.success("Texto corregido:")
         st.write(correccion)
@@ -101,7 +101,7 @@ def generador_mensajes_facebook():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key)
+        mensaje = generar_texto(prompt, api_key, max_tokens=4096)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
@@ -113,7 +113,7 @@ def generador_mensajes_twitter():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=100, temperature=0.5)
+        mensaje = generar_texto(prompt, api_key, max_tokens=280)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
@@ -125,7 +125,7 @@ def generador_mensajes_instagram():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=100, temperature=0.5)
+        mensaje = generar_texto(prompt, api_key, max_tokens=2200)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
@@ -137,7 +137,7 @@ def generador_columnas_periodisticas():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar columna") and api_key:
-        columna = generar_texto(prompt, api_key)
+        columna = generar_texto(prompt, api_key, max_tokens=4096)
         
         st.success("Columna generada:")
         st.write(columna)
@@ -149,7 +149,7 @@ def generador_articulos():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar artículo") and api_key:
-        articulo = generar_texto(prompt, api_key)
+        articulo = generar_texto(prompt, api_key, max_tokens=4096)
         
         st.success("Artículo generado:")
         st.write(articulo)
@@ -161,7 +161,7 @@ def generador_ensayos():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar ensayo") and api_key:
-        ensayo = generar_texto(prompt, api_key)
+        ensayo = generar_texto(prompt, api_key, max_tokens=4096)
         
         st.success("Ensayo generado:")
         st.write(ensayo)
