@@ -42,10 +42,8 @@ def generador_emails_nuevos():
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
-    tono_respuesta = st.selectbox("Selecciona el tono", ("Formal", "Informal"))
-    
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}\nTono: {tono_respuesta}"
+        prompt = f"Asunto del e-mail: {asunto}"
         email = generar_texto(prompt, api_key, max_tokens=3950)
         
         st.success("E-mail generado:")
@@ -57,22 +55,11 @@ def responder_emails():
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
-    intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
-    
-    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
-    
     if st.button("Responder al e-mail") and api_key:
-        prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
         email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
-        longitud_respuesta = clasificar_longitud(email)
-        extension_respuesta = clasificar_extension(email)
         
         st.success("Respuesta generada:")
         st.write(email)
-        st.write(f"Intención de la respuesta: {intencion_respuesta}")
-        st.write(f"Tono de la respuesta: {tono_respuesta}")
-        st.write(f"Longitud de la respuesta: {longitud_respuesta}")
-        st.write(f"Extensión de la respuesta: {extension_respuesta}")
 
 def corrector_estilo():
     st.title("Corrector de estilo")
