@@ -42,10 +42,10 @@ def generador_emails_nuevos():
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
-    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
+    tono_respuesta = st.selectbox("Selecciona el tono", ("Formal", "Informal"))
     
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}\nTono de la respuesta: {tono_respuesta}"
+        prompt = f"Asunto del e-mail: {asunto}\nTono: {tono_respuesta}"
         email = generar_texto(prompt, api_key, max_tokens=3950)
         
         st.success("E-mail generado:")
