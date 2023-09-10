@@ -124,30 +124,6 @@ def generador_mensajes_instagram():
         st.success("Mensaje generado:")
         st.write(mensaje)
 
-def generador_columnas_periodisticas():
-    st.title("Generador de columnas periodísticas")
-    prompt = st.text_area("Ingresa el título de la columna")
-    
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
-    if st.button("Generar columna") and api_key:
-        columna = generar_texto(prompt, api_key, max_tokens=3992)
-        
-        st.success("Columna generada:")
-        st.write(columna)
-
-def generador_articulos():
-    st.title("Generador de artículos")
-    prompt = st.text_area("Ingresa el titulo del artículo")
-    
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
-    if st.button("Generar artículo") and api_key:
-        articulo = generar_texto(prompt, api_key, max_tokens=3992)
-        
-        st.success("Artículo generado:")
-        st.write(articulo)
-
 def generador_ensayos():
     st.title("Generador de ensayos")
     prompt = st.text_area("Ingresa el título del ensayo")
@@ -155,6 +131,7 @@ def generador_ensayos():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar ensayo") and api_key:
+        prompt += "\n\nLongitud del ensayo: Largo"
         ensayo = generar_texto(prompt, api_key, max_tokens=3992)
         
         st.success("Ensayo generado:")
@@ -164,7 +141,7 @@ def main():
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
-        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de columnas periodísticas", "Generador de artículos", "Generador de ensayos")
+        ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de ensayos")
     )
     
     if app == "Generador de e-mails nuevos":
@@ -179,10 +156,6 @@ def main():
         generador_mensajes_twitter()
     elif app == "Generador de mensajes de Instagram":
         generador_mensajes_instagram()
-    elif app == "Generador de columnas periodísticas":
-        generador_columnas_periodisticas()
-    elif app == "Generador de artículos":
-        generador_articulos()
     elif app == "Generador de ensayos":
         generador_ensayos()
 
