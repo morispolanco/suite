@@ -16,6 +16,16 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     return response.choices[0].text.strip()
 
 
+def clasificar_longitud(respuesta):
+    longitud = len(respuesta)
+    
+    if longitud < 50:
+        return "Corta"
+    elif longitud < 150:
+        return "Mediana"
+    else:
+        return "Larga"
+
 def clasificar_extension(respuesta):
     palabras = respuesta.split()
     num_palabras = len(palabras)
@@ -30,15 +40,21 @@ def clasificar_extension(respuesta):
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
+    tono = st.selectbox("Selecciona el tono del e-mail", ("Formal", "Informal"))
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}"
+        prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}"
         email = generar_texto(prompt, api_key, max_tokens=3950)
+        longitud_email = clasificar_longitud(email)
+        extension_email = clasificar_extension(email)
         
         st.success("E-mail generado:")
         st.write(email)
+        st.write(f"Tono del e-mail: {tono}")
+        st.write(f"Longitud del e-mail: {longitud_email}")
+        st.write(f"Extensión del e-mail: {extension_email}")
 
 def responder_emails():
     st.title("Responder a e-mails")
@@ -53,25 +69,14 @@ def responder_emails():
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}"
         email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
         longitud_respuesta = clasificar_longitud(email)
+        extension_respuesta = clasificar_extension(email)
         
         st.success("Respuesta generada:")
         st.write(email)
         st.write(f"Intención de la respuesta: {intencion_respuesta}")
         st.write(f"Tono de la respuesta: {tono_respuesta}")
         st.write(f"Longitud de la respuesta: {longitud_respuesta}")
-
-def responder_emails():
-    st.title("Responder a e-mails")
-    prompt = st.text_area("Ingresa el e-mail recibido")
-    
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
-    if st.button("Responder al e-mail") and api_key:
-        email = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
-        
-        st.success("Respuesta generada:")
-        st.write(email)
-
+        st.write(f"Extensión de la respuesta: {extension_respuesta}")
 def corrector_estilo():
     st.title("Corrector de estilo")
     prompt = st.text_area("Ingresa el texto a corregir")
