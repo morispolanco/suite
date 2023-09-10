@@ -38,7 +38,7 @@ def clasificar_extension(respuesta):
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
-    prompt = st.text_area("Ingresa el inicio del e-mail")
+    prompt = st.text_area("Ingresa el asunto del e-mail")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -96,7 +96,7 @@ def corrector_estilo():
 
 def generador_mensajes_facebook():
     st.title("Generador de mensajes de Facebook")
-    prompt = st.text_area("Ingresa el inicio del mensaje")
+    prompt = st.text_area("Ingresa e título del mensaje")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -120,7 +120,7 @@ def generador_mensajes_twitter():
 
 def generador_mensajes_instagram():
     st.title("Generador de mensajes de Instagram")
-    prompt = st.text_area("Ingresa el inicio del mensaje")
+    prompt = st.text_area("Ingresa el títuo del mensaje")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -132,7 +132,7 @@ def generador_mensajes_instagram():
 
 def generador_columnas_periodisticas():
     st.title("Generador de columnas periodísticas")
-    prompt = st.text_area("Ingresa el inicio de la columna")
+    prompt = st.text_area("Ingresa el título de la columna")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -144,7 +144,7 @@ def generador_columnas_periodisticas():
 
 def generador_articulos():
     st.title("Generador de artículos")
-    prompt = st.text_area("Ingresa el inicio del artículo")
+    prompt = st.text_area("Ingresa el titulo del artículo")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -156,7 +156,7 @@ def generador_articulos():
 
 def generador_ensayos():
     st.title("Generador de ensayos")
-    prompt = st.text_area("Ingresa el inicio del ensayo")
+    prompt = st.text_area("Ingresa el título del ensayo")
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
