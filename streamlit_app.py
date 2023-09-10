@@ -131,7 +131,7 @@ def generador_mensajes_linkedin():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=280)
+        mensaje = generar_texto(prompt, api_key, max_tokens=2080)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
