@@ -38,11 +38,11 @@ def clasificar_extension(respuesta):
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
-    asunto = st.text_input("Ingresa el asunto del e-mail")
+    asunto = st.text_input("Ingresa el asunto del e-mail", key="asunto_email")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
-    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
+    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"), key="tono_respuesta")
     
     if st.button("Generar e-mail"):
         if not api_key:
@@ -58,11 +58,11 @@ def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
     
-    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
+    tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"), key="tono_respuesta")
     
     if st.button("Responder al e-mail"):
         if not api_key:
@@ -84,7 +84,7 @@ def corrector_estilo():
     st.title("Corrector de estilo")
     prompt = st.text_area("Ingresa el texto a corregir")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Corregir estilo"):
         if not api_key:
@@ -99,7 +99,7 @@ def generador_mensajes_facebook():
     st.title("Generador de mensajes de Facebook")
     prompt = st.text_area("Ingresa el título del mensaje")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Generar mensaje"):
         if not api_key:
@@ -114,7 +114,7 @@ def generador_mensajes_twitter():
     st.title("Generador de mensajes de Twitter")
     prompt = st.text_area("Ingresa el inicio del mensaje")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Generar mensaje"):
         if not api_key:
@@ -129,7 +129,7 @@ def generador_mensajes_instagram():
     st.title("Generador de mensajes de Instagram")
     prompt = st.text_area("Ingresa el título del mensaje")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Generar mensaje"):
         if not api_key:
@@ -144,7 +144,7 @@ def generador_mensajes_linkedin():
     st.title("Generador de mensajes de LinkedIn")
     prompt = st.text_area("Ingresa el inicio del mensaje")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Generar mensaje"):
         if not api_key:
@@ -159,7 +159,7 @@ def generador_ensayos():
     st.title("Generador de ensayos")
     prompt = st.text_area("Ingresa el título del ensayo")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Generar ensayo"):
         if not api_key:
@@ -175,7 +175,7 @@ def expansor():
     st.title("Expansor")
     prompt = st.text_area("Ingresa el texto a expandir")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Expandir texto"):
         if not api_key:
@@ -190,7 +190,7 @@ def resumidor():
     st.title("Resumidor")
     prompt = st.text_area("Ingresa el texto a resumir")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Resumir texto"):
         if not api_key:
@@ -205,7 +205,7 @@ def parafraseador():
     st.title("Parafraseador")
     prompt = st.text_area("Ingresa el texto a parafrasear")
     
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if st.button("Parafrasear texto"):
         if not api_key:
@@ -218,14 +218,15 @@ def parafraseador():
 
 def main():
     st.sidebar.title("Aplicaciones")
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
+    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password", key="api_key")
     
     if not api_key:
         st.warning("Por favor ingresa una API Key válida para continuar.")
     else:
         app = st.sidebar.selectbox(
             "Selecciona una aplicación",
-            ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador")
+            ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Resumidor", "Parafraseador"),
+            key="app"
         )
         
         if app == "Generador de e-mails nuevos":
