@@ -34,7 +34,10 @@ def generador_emails():
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
+    correo_respuesta = st.text_input("Ingresa el correo al que quieres responder")
+    
     if st.button("Generar e-mail") and api_key:
+        prompt += f"\n\nResponder a: {correo_respuesta}"
         email = generar_texto(prompt, api_key)
         
         st.success("E-mail generado:")
