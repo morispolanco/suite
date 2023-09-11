@@ -7,7 +7,7 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=max_tokens - 20,
+        max_tokens=max_tokens,
         n=1,
         stop=None,
         temperature=temperature
