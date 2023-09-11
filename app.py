@@ -42,7 +42,7 @@ def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
     tono = st.selectbox("Selecciona el tono del e-mail", ("Formal", "Informal"))
-    longitud_email = st.slider("Selecciona la longitud del e-mail", 50, 100, 150)
+    longitud_email = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
     
     api_key = os.getenv("OPENAI_API_KEY")
     
@@ -58,7 +58,7 @@ def generador_emails_nuevos():
 def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
-    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 100, 150)
+    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 500, 150)
     
     api_key = os.getenv("OPENAI_API_KEY")
     
