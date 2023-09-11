@@ -20,7 +20,7 @@ def presentacion():
     st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
     st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
     st.write("Puedes elegir la aplicación que necesites en el menú de la columna izquierda.")
-    st.write("Autor: Morris Polanco")
+    st.write("Autor: Moris Polanco (@morispolanco)")
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
