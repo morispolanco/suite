@@ -15,12 +15,7 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     
     return response.choices[0].text.strip()
 
-def presentacion():
-    st.title("Suite de aplicaciones de lenguaje")
-    st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
-    st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
-    st.write("Puedes elegir la aplicación que necesites en el menú de la columna izquierda.")
-    st.write("Autor: Moris Polanco (@morispolanco)")
+
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
@@ -166,12 +161,6 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
-    st.title("Suite de aplicaciones de lenguaje")
-    st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
-    st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
-    
-    presentacion()
-    
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
