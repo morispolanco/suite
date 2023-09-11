@@ -175,6 +175,8 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
+    presentacion()
+    
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
