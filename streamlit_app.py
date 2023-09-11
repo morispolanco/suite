@@ -15,9 +15,7 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     
     return response.choices[0].text.strip()
 
-def presentacion():
-    st.sidebar.title("Suite de aplicaciones de lenguaje")
-    st.sidebar.write("Autor: Moris Polanco (@morispolanco)")
+
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
@@ -163,13 +161,8 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
-    presentacion()
-    
-    st.sidebar.text_input("Autor: Moris Polanco (@morispolanco)")
-    api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    
     st.sidebar.title("Aplicaciones")
-    app = st.sidebar.radio(
+    app = st.sidebar.selectbox(
         "Selecciona una aplicación",
         ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Parafraseador")
     )
