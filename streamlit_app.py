@@ -175,7 +175,9 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
-    presentacion()
+    st.title("Suite de aplicaciones de lenguaje")
+    st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
+    st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
     
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
