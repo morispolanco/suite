@@ -19,17 +19,9 @@ def presentacion():
     st.title("Suite de aplicaciones de lenguaje")
     st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
     st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
-    st.write("- Generador de e-mails nuevos: Genera e-mails nuevos con un asunto, tono y longitud personalizados.")
-    st.write("- Responder a e-mails: Genera respuestas a e-mails recibidos con una intención, tono y longitud personalizados.")
-    st.write("- Corrector de estilo: Corrige el estilo de un texto para mejorarlo.")
-    st.write("- Generador de mensajes de Facebook: Genera mensajes para publicaciones en Facebook.")
-    st.write("- Generador de mensajes de Twitter: Genera mensajes para publicaciones en Twitter.")
-    st.write("- Generador de mensajes de Instagram: Genera mensajes para publicaciones en Instagram.")
-    st.write("- Generador de mensajes de LinkedIn: Genera mensajes para publicaciones en LinkedIn.")
-    st.write("- Generador de ensayos: Genera ensayos con un título personalizado.")
-    st.write("- Expansor: Expande un texto para hacerlo más largo.")
-    st.write("- Parafraseador: Parafrasea un texto para expresarlo de manera diferente.")
-    
+    st.write("Puedes elegir la aplicación que necesites en el menú de la columna izquierda.")
+    st.write("Autor: Morris Polanco")
+
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
@@ -75,7 +67,6 @@ def responder_emails():
         
         st.success("Respuesta generada:")
         st.write(respuesta)
-
 
 def corrector_estilo():
     st.title("Corrector de estilo")
@@ -175,9 +166,7 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
-    st.title("Suite de aplicaciones de lenguaje")
-    st.write("¡Bienvenido a la Suite de aplicaciones de lenguaje!")
-    st.write("Esta suite contiene varias aplicaciones de procesamiento de lenguaje natural para ayudarte con diferentes tareas.")
+    presentacion()
     
     st.sidebar.title("Aplicaciones")
     app = st.sidebar.selectbox(
