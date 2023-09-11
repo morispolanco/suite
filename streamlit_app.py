@@ -19,7 +19,7 @@ def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
     tono = st.selectbox("Selecciona el tono del e-mail", ("Formal", "Informal"))
-    longitud = st.slider("Selecciona la longitud del e-mail", 50, 100, 150)
+    longitud = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
@@ -45,7 +45,7 @@ def responder_emails():
     
     intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
-    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 100, 150)
+    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 500, 150)
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
