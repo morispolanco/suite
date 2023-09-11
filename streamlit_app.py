@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import openai
 
@@ -7,7 +8,7 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=max_tokens,
+        max_tokens=max_tokens - 20,
         n=1,
         stop=None,
         temperature=temperature
@@ -16,25 +17,40 @@ def generar_texto(prompt, api_key, max_tokens=4096, temperature=0.8):
     return response.choices[0].text.strip()
 
 
+def clasificar_longitud(respuesta):
+    longitud = len(respuesta)
+    
+    if longitud < 50:
+        return "Corta"
+    elif longitud < 150:
+        return "Mediana"
+    else:
+        return "Larga"
+
+def clasificar_extension(respuesta):
+    palabras = respuesta.split()
+    num_palabras = len(palabras)
+    
+    if num_palabras < 10:
+        return "Breve"
+    elif num_palabras < 20:
+        return "Moderada"
+    else:
+        return "Extensa"
 
 def generador_emails_nuevos():
     st.title("Generador de e-mails nuevos")
     asunto = st.text_input("Ingresa el asunto del e-mail")
     tono = st.selectbox("Selecciona el tono del e-mail", ("Formal", "Informal"))
-    longitud = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
+    longitud_email = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar e-mail") and api_key:
-        prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}\nLongitud del e-mail: {longitud}"
-        max_tokens = 0
-        if longitud == "Corto":
-            max_tokens = 100
-        elif longitud == "Mediano":
-            max_tokens = 200
-        elif longitud == "Largo":
-            max_tokens = 300
-        email = generar_texto(prompt, api_key, max_tokens=max_tokens)
+        prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}\nLongitud del e-mail: {longitud_email}"
+        email = generar_texto(prompt, api_key, max_tokens=3950)
+        longitud_email_generado = clasificar_longitud(email)
+        extension_email_generado = clasificar_extension(email)
         
         st.success("E-mail generado:")
         st.write(email)
@@ -42,26 +58,24 @@ def generador_emails_nuevos():
 def responder_emails():
     st.title("Responder a e-mails")
     prompt = st.text_area("Ingresa el e-mail recibido")
+    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 500, 150)
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     intencion_respuesta = st.text_input("Ingresa la intención de la respuesta")
     tono_respuesta = st.selectbox("Selecciona el tono de la respuesta", ("Formal", "Informal"))
-    longitud_respuesta = st.slider("Selecciona la longitud de la respuesta", 50, 500, 150)
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
-        max_tokens = 0
-        if longitud_respuesta == "Corta":
-            max_tokens = 100
-        elif longitud_respuesta == "Mediana":
-            max_tokens = 200
-        elif longitud_respuesta == "Larga":
-            max_tokens = 300
-        respuesta = generar_texto(prompt, api_key, max_tokens=max_tokens, temperature=0.5)
+        respuesta = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
+        longitud_respuesta_generada = clasificar_longitud(respuesta)
+        extension_respuesta_generada = clasificar_extension(respuesta)
         
         st.success("Respuesta generada:")
         st.write(respuesta)
+
+
+
 
 def corrector_estilo():
     st.title("Corrector de estilo")
