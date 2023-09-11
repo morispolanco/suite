@@ -176,7 +176,7 @@ def parafraseador():
 
 def main():
     st.sidebar.title("Suite de aplicaciones de lenguaje")
-    st.sidebar.text("Por Moris Polanco")
+    st.sidebar.text("Por Moris Polanco (@morispolanco)")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
         ("Generador de e-mails nuevos", "Responder a e-mails", "Corrector de estilo", "Generador de mensajes de Facebook", "Generador de mensajes de Twitter", "Generador de mensajes de Instagram", "Generador de mensajes de LinkedIn", "Generador de ensayos", "Expansor", "Parafraseador")
