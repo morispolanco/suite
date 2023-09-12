@@ -175,7 +175,7 @@ def parafraseador():
         st.write(texto_parafraseado)
 
 def main():
-    st.sidebar.title("Suite de aplicaciones de lenguaje")
+    st.sidebar.title("Suite de aplicaciones de escritura")
     st.sidebar.text("Por Moris Polanco (@morispolanco)")
     app = st.sidebar.selectbox(
         "Selecciona una aplicación",
