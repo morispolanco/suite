@@ -67,7 +67,7 @@ def responder_emails():
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
-        respuesta = generar_texto(prompt, api_key, max_tokens=3950, temperature=0.5)
+        respuesta = generar_texto(prompt, api_key, max_tokens=2000, temperature=0.5)
         longitud_respuesta_generada = clasificar_longitud(respuesta)
         extension_respuesta_generada = clasificar_extension(respuesta)
         
