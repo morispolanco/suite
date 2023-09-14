@@ -157,7 +157,7 @@ def expansor():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Expandir texto") and api_key:
-        texto_expandido = generar_texto(prompt, api_key, max_tokens=4000)
+        texto_expandido = generar_texto(prompt, api_key, max_tokens=3000)
         
         st.success("Texto expandido:")
         st.write(texto_expandido)
