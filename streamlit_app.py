@@ -84,7 +84,7 @@ def corrector_estilo():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Corregir estilo") and api_key:
-        correccion = generar_texto(prompt, api_key, max_tokens=3950)
+        correccion = generar_texto(prompt, api_key, max_tokens=2950)
         
         st.success("Texto corregido:")
         st.write(correccion)
