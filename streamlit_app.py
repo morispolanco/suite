@@ -67,7 +67,7 @@ def responder_emails():
     
     if st.button("Responder al e-mail") and api_key:
         prompt += f"\n\nIntención de la respuesta: {intencion_respuesta}\nTono de la respuesta: {tono_respuesta}\nLongitud de la respuesta: {longitud_respuesta}"
-        respuesta = generar_texto(prompt, api_key, max_tokens=2000, temperature=0.5)
+        respuesta = generar_texto(prompt, api_key, max_tokens=500, temperature=0.5)
         longitud_respuesta_generada = clasificar_longitud(respuesta)
         extension_respuesta_generada = clasificar_extension(respuesta)
         
@@ -84,7 +84,7 @@ def corrector_estilo():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Corregir estilo") and api_key:
-        correccion = generar_texto(prompt, api_key, max_tokens=2950)
+        correccion = generar_texto(prompt, api_key, max_tokens=2000)
         
         st.success("Texto corregido:")
         st.write(correccion)
@@ -120,7 +120,7 @@ def generador_mensajes_instagram():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Generar mensaje") and api_key:
-        mensaje = generar_texto(prompt, api_key, max_tokens=2200)
+        mensaje = generar_texto(prompt, api_key, max_tokens=500)
         
         st.success("Mensaje generado:")
         st.write(mensaje)
@@ -157,7 +157,7 @@ def expansor():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Expandir texto") and api_key:
-        texto_expandido = generar_texto(prompt, api_key, max_tokens=3000)
+        texto_expandido = generar_texto(prompt, api_key, max_tokens=2000)
         
         st.success("Texto expandido:")
         st.write(texto_expandido)
@@ -169,7 +169,7 @@ def parafraseador():
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
     
     if st.button("Parafrasear texto") and api_key:
-        texto_parafraseado = generar_texto(prompt, api_key, max_tokens=4000)
+        texto_parafraseado = generar_texto(prompt, api_key, max_tokens=2000)
         
         st.success("Texto parafraseado:")
         st.write(texto_parafraseado)
