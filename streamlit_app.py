@@ -45,8 +45,7 @@ def generador_emails_nuevos():
     longitud_email = st.slider("Selecciona la longitud del e-mail", 50, 500, 150)
     
     api_key = st.sidebar.text_input("Ingresa tu API Key de OpenAI", type="password")
-    "[Obtenga una clave de OpenAI](https://platform.openai.com/account/api-keys)"
-    
+        
     if st.button("Generar e-mail") and api_key:
         prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}\nLongitud del e-mail: {longitud_email}"
         email = generar_texto(prompt, api_key, max_tokens=1000)
