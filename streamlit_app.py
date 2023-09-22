@@ -48,7 +48,7 @@ def generador_emails_nuevos():
     
     if st.button("Generar e-mail") and api_key:
         prompt = f"Asunto del e-mail: {asunto}\nTono del e-mail: {tono}\nLongitud del e-mail: {longitud_email}"
-        email = generar_texto(prompt, api_key, max_tokens=2000)
+        email = generar_texto(prompt, api_key, max_tokens=1000)
         longitud_email_generado = clasificar_longitud(email)
         extension_email_generado = clasificar_extension(email)
         
